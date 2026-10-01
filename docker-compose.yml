@@ -1,0 +1,30 @@
+services:
+  aerovox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aerovox:latest
+    container_name: aerovox-app
+    restart: unless-stopped
+    ports:
+      # Port di host:port di kontainer (dapat diubah lewat .env atau default 3000)
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3000
+    volumes:
+      # Penyimpanan persisten untuk database SQLite (tabel jadwal, audio, log)
+      - ./data:/app/data
+      # Penyimpanan persisten untuk berkas audio siaran & unggahan baru
+      - ./public/audio:/app/public/audio
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+networks:
+  default:
+    name: aerovox-network

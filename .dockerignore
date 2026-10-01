@@ -1,0 +1,31 @@
+# Dependency and build directories
+node_modules
+.output
+.nuxt
+.nitro
+.cache
+dist
+
+# Git and VCS
+.git
+.github
+.gitignore
+
+# IDE and Editor configs
+.idea
+.vscode
+.fleet
+*.sublime-*
+.DS_Store
+Thumbs.db
+
+# Large archives and temporary logs
+audio.zip
+*.log
+logs
+plan.md
+
+# Local env files
+.env
+.env.local
+.env.*.local
