@@ -46,7 +46,7 @@ export default defineEventHandler((event) => {
   const range = getHeader(event, 'range')
   if (range) {
     const parts = range.replace(/bytes=/, '').split('-')
-    const start = parseInt(parts[0], 10)
+    const start = parseInt(parts[0] || '0', 10)
     const end = parts[1] ? parseInt(parts[1], 10) : stat.size - 1
     const chunkSize = end - start + 1
 
